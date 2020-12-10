@@ -95,12 +95,63 @@ const fs = require("fs");
 // })
 
 //DELETING A FILE
-fs.unlink('example.txt', (err)=>{
+// fs.unlink('example.txt', (err)=>{
+//     if(err)
+//     console.log(err)
+//     else
+//     console.log("File succcessfuly deleted");
+// })
+
+
+//WORKING WITH FOLDERS IN FILE SYSTEM MODULE
+// fs.mkdir('database',(err)=>{
+//     if(err)
+//     console.log(err)
+//     else
+//     fs.writeFile('./database/new.txt', 'i am enjoying', (err)=>{
+//         if(err)
+//         console.log(err)
+//         else
+//         console.log("File created in folder")
+//     })
+// })
+
+// REMOVING A FOLDER
+
+// fs.mkdir('models', (err)=>{
+//     if(err)
+//     console.log(err)
+//     else
+//     //console.log("folder successfully created")
+//     fs.rmdir('models', (err)=>{
+//         if(err)
+//         console.log(err)
+//         else
+//         console.log('file deleted')
+//     })
+// })
+// fs.unlink('./database/new.txt', (err)=>{
+//     if(err)
+//     console.log(err)
+//     else{
+//      fs.rmdir("database", (err) => {
+//        if (err) console.log(err);
+//        else console.log("file deledted");
+//      });
+//     }
+// })
+
+fs.readdir('data', (err, files)=>{
     if(err)
     console.log(err)
     else
-    console.log("File succcessfuly deleted");
+    //console.log(files)
+    for(let file of files){ 
+      fs.unlink("./data/" + file, (err) => {
+        if (err) console.log(err);
+        else console.log("file deleted");
+      });
+    }
+   
+
 })
-
-
-
