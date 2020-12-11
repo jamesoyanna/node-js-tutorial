@@ -141,17 +141,25 @@ const fs = require("fs");
 //     }
 // })
 
-fs.readdir('data', (err, files)=>{
-    if(err)
-    console.log(err)
-    else
-    //console.log(files)
-    for(let file of files){ 
-      fs.unlink("./data/" + file, (err) => {
-        if (err) console.log(err);
-        else console.log("file deleted");
-      });
-    }
+// fs.readdir('data', (err, files)=>{
+//     if(err)
+//     console.log(err)
+//     else
+//     //console.log(files)
+//     for(let file of files){ 
+//       fs.unlink("./data/" + file, (err) => {
+//         if (err) console.log(err);
+//         else console.log("file deleted");
+//       });
+//     }
    
 
-})
+// })
+
+const readStream = fs.createReadStream("./data/example.txt", "utf8");
+const writeStream = fs.createWriteStream('lagos.txt')
+    readStream.on('data', (chunk)=>{
+        writeStream.write(chunk);
+    
+
+});
