@@ -155,11 +155,29 @@ const fs = require("fs");
    
 
 // })
-
-const readStream = fs.createReadStream("./data/example.txt", "utf8");
-const writeStream = fs.createWriteStream('lagos.txt')
-    readStream.on('data', (chunk)=>{
-        writeStream.write(chunk);
+      
+         // READING DATA IN CHUNK
+// const readStream = fs.createReadStream("./data/example.txt", "utf8");
+// const writeStream = fs.createWriteStream('lagos.txt')
+//     readStream.on('data', (chunk)=>{
+//         writeStream.write(chunk);
     
 
-});
+// });
+
+
+    // USING PIPE AND PIPE CHAINING
+
+    //Compressing a file
+//     const zlib = require('zlib');
+//     const gzip = zlib.createGzip();
+// const readStream = fs.createReadStream("./data/example.txt", "utf8");
+// const writeStream = fs.createWriteStream('lagos.txt.gz')
+// readStream.pipe(gzip).pipe(writeStream);
+
+//Uncompressing a file 
+const zlib = require("zlib");
+const gunzip = zlib.createGunzip();
+const readStream = fs.createReadStream("./data/lagos.txt.gz");
+const writeStream = fs.createWriteStream("uncompress.txt");
+readStream.pipe(gunzip).pipe(writeStream);
