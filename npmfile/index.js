@@ -7,3 +7,13 @@ app.get('/', (req, res)=>{
 app.listen(port, ()=>{
     console.log(`Sever listening on port ${port}`);
 })
+
+app.get("/example", (req, res) => {
+  res.send("Hitting example route");
+});
+
+app.get('/example/:name/:age', (req, res)=>{
+    console.log((req.params));
+    res.send(req.params.name + ':' + req.params.age);
+})
+
