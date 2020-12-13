@@ -176,8 +176,32 @@ const fs = require("fs");
 // readStream.pipe(gzip).pipe(writeStream);
 
 //Uncompressing a file 
-const zlib = require("zlib");
-const gunzip = zlib.createGunzip();
-const readStream = fs.createReadStream("./data/lagos.txt.gz");
-const writeStream = fs.createWriteStream("uncompress.txt");
-readStream.pipe(gunzip).pipe(writeStream);
+// const zlib = require("zlib");
+// const gunzip = zlib.createGunzip();
+// const readStream = fs.createReadStream("./data/lagos.txt.gz");
+// const writeStream = fs.createWriteStream("uncompress.txt");
+// readStream.pipe(gunzip).pipe(writeStream);
+
+// Working with the http module
+// const http = require('http');
+// const server = http.createServer((req, res)=>{
+//     res.write("Hello world from Nigeria")
+//     res.end();
+// })
+
+// server.listen('3000')
+ 
+// Specify condition for url
+
+const http = require("http");
+const server = http.createServer((req, res) => {
+ if(req.url === "/"){
+ res.write("Hello world from Nigeria");
+ res.end();
+ } else{
+     res.write("You are using the wrong domain")
+     res.end();
+ }
+});
+
+server.listen("3000");
