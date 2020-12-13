@@ -22,7 +22,8 @@
 
 // SERVING STATIC FILES
 const express = require("express");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const Joi = require('joi')
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -40,7 +41,18 @@ app.listen(port, () => {
 app.post('/', (req, res)=>{
     console.log(req.body)
 // Database work here
-    res.json({success: true})
-})
+   const Schema = Joi.object({
+       email: Joi.string().trim().email().trim().required(),
+       password: Joi.string().min(5).max(10).required()
+   });
 
+   Schema.validate(req.body,(err, result)=>{
+       if(err){
+         res.send("An error has occoured");
+         console.log(err)
+       }
+       console.log(result)
+       res.send('Successfully posted data')
+   })
+})
 
