@@ -61,7 +61,7 @@
 // )
  // LEARNING ABOUT THE FILE SYSTEM MODULE
 
-const fs = require("fs");
+//const fs = require("fs");
 
 //CREATING A FILE
 
@@ -192,16 +192,52 @@ const fs = require("fs");
 // server.listen('3000')
  
 // Specify condition for url
+// const http = require("http");
+// const server = http.createServer((req, res) => {
+//  if(req.url === "/"){
+//  res.write("Hello world from Nigeria");
+//  res.end();
+//  } else{
+//      res.write("You are using the wrong domain")
+//      res.end();
+//  }
+// });
 
+// server.listen("3000");
+
+//Server files with http and file system module
+//Sending an html file to the client
+
+// const http = require('http');
+// const fs = require('fs');
+// http.createServer((req, res)=>{
+//  const readStream = fs.createReadStream('./data/index.html')
+//  res.writeHead(200, {'Content-type': 'text/html'})
+//  readStream.pipe(res)
+
+// }).listen('3000');
+
+// // Sending a json file to the client
+// const http = require("http");
+// const fs = require("fs");
+// http
+//   .createServer((req, res) => {
+//     const readStream = fs.createReadStream("./data/index.json");
+//     res.writeHead(200, { "Content-type": "application/json" });
+//     readStream.pipe(res);
+//   })
+//   .listen("3000");
+
+// Sending an image file to the client
 const http = require("http");
-const server = http.createServer((req, res) => {
- if(req.url === "/"){
- res.write("Hello world from Nigeria");
- res.end();
- } else{
-     res.write("You are using the wrong domain")
-     res.end();
- }
-});
+const fs = require("fs");
+http
+  .createServer((req, res) => {
+    const readStream = fs.createReadStream("./data/ju.jpg");
+    res.writeHead(200, { "Content-type": "image/jpg" });
+    readStream.pipe(res);
+  })
+  .listen("3000");
 
-server.listen("3000");
+
+
