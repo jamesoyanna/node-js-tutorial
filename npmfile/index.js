@@ -14,6 +14,7 @@ app.get("/example", (req, res) => {
 
 app.get('/example/:name/:age', (req, res)=>{
     console.log((req.params));
+    console.log(req.query)
     res.send(req.params.name + ':' + req.params.age);
 })
 
