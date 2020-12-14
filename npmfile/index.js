@@ -28,31 +28,32 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-app.use('/public',express.static(path.join(__dirname, 'static')) )
+const people = require('./routes/people')
+
+//app.use('/public',express.static(path.join(__dirname, 'static')) )
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'static', 'index.html'));
-});
+app.use(bodyParser.json());
+app.use('/', people)
+
 app.listen(port, () => {
   console.log(`Sever listening on port ${port}`);
 });
 
-app.post('/', (req, res)=>{
-    console.log(req.body)
-// Database work here
-   const Schema = Joi.object({
-       email: Joi.string().trim().email().trim().required(),
-       password: Joi.string().min(5).max(10).required()
-   });
+// app.post('/', (req, res)=>{
+//     console.log(req.body)
+// // Database work here
+//    const Schema = Joi.object({
+//        email: Joi.string().trim().email().trim().required(),
+//        password: Joi.string().min(5).max(10).required()
+//    });
 
-   Schema.validate(req.body,(err, result)=>{
-       if(err){
-         res.send("An error has occoured");
-         console.log(err)
-       }
-       console.log(result)
-       res.send('Successfully posted data')
-   })
-})
+//    Schema.validate(req.body,(err, result)=>{
+//        if(err){
+//          res.send("An error has occoured");
+//          console.log(err)
+//        }
+//        console.log(result)
+//        res.render('index');
+//    })
+// })
 
